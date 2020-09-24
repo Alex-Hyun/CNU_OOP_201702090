@@ -4,7 +4,6 @@ void swap(int & first, int & second) {
     int temp = first;
     first = second;
     second = temp;
-    second = 6;
 }
 int main() {
     int a = 2, b = 3;

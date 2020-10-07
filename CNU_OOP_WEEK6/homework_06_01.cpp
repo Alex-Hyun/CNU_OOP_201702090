@@ -32,7 +32,7 @@ My_cat::My_cat(const My_cat& cat) : weight(10) { //Copy constructor
 }
 
 My_cat::~My_cat() {		//Destructor
-	if (name) delete[] name;
+	if (name) delete[] name; 
 }
 
 //eat 함수 구현

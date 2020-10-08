@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+ï»¿#define _CRT_SECURE_NO_WARNINGS
 
 #include <iostream>
 
@@ -12,7 +12,7 @@ public:
 	My_cat(const My_cat& cat);
 	~My_cat();
 
-	//eatÇÔ¼ö ¼±¾ð
+	//eatí•¨ìˆ˜ ì„ ì–¸
 	My_cat& eat(int n);
 
 	void show_status() const;
@@ -35,7 +35,7 @@ My_cat::~My_cat() {		//Destructor
 	if (name) delete[] name; 
 }
 
-//eat ÇÔ¼ö ±¸Çö
+//eat í•¨ìˆ˜ êµ¬í˜„
 My_cat& My_cat::eat(int n) {
 	this->weight += n;
 	return *this;
@@ -45,7 +45,7 @@ void My_cat::show_status() const {
 	std::cout << " Weight : " << weight << std::endl;
 }
 int main() {
-	My_cat cat1("Nabi");	//Cat 1 »ý¼º
+	My_cat cat1("Nabi");	//Cat 1 ìƒì„±
 	cat1.show_status();
 
 	cat1.eat(4);

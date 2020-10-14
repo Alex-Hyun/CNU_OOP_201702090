@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 
 bool funcA() {
     int c;
@@ -12,7 +12,7 @@ int main() {
         funcA();
     }
     catch (std::out_of_range& e) {
-        std::cout << "Exception : " << e.what();
+        std::cout << "Exception : " << e.what(); // what()을 통해 예외 객체의 인자를 얻는다.
     }
 
     return 0;

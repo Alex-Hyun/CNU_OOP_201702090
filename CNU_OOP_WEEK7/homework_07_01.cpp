@@ -1,4 +1,4 @@
-#include <fstream>
+ï»¿#include <fstream>
 #include <iostream>
 #include <string>
 
@@ -12,7 +12,7 @@ public:
 	}
 };
 
-// << ¿¬»êÀÚ ¿À¹ö·Îµù ÇÔ¼ö
+// << ì—°ì‚°ìž ì˜¤ë²„ë¡œë”© í•¨ìˆ˜
 std::ostream& operator<< (std::ostream& os, AnyString& as) {
 	os << as.getAnyString();
 	return os;

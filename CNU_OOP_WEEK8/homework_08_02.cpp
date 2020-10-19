@@ -8,7 +8,7 @@ public:
 	virtual int doOperation(int num1, int num2) = 0;
 };
 
-// Concrete Strategy
+// Concrete Strateg
 class OperationAdd : public Strategy {
 	int doOperation(int num1, int num2) override{
 		return num1 + num2;

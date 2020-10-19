@@ -10,7 +10,6 @@ public:
 	std::string getAnyString() {
 		return "Stored String :: " + anyString;
 	}
-	//std::ostream& operator<< (std::ostream& os, AnyString& as);
 };
 
 // << 연산자 오버로딩 함수

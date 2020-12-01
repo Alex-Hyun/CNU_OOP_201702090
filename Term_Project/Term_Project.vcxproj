@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{5a0c7e28-cca7-4baa-9d30-f14f1c124d8c}</ProjectGuid>
-    <RootNamespace>CNUOOPWEEK9</RootNamespace>
+    <ProjectGuid>{e08cb4b1-578a-40b5-9b56-ae86b08aa765}</ProjectGuid>
+    <RootNamespace>TermProject</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -88,7 +88,6 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -140,11 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="example_09_01.cpp" />
-    <ClCompile Include="example_09_02.cpp" />
-    <ClCompile Include="example_09_03.cpp" />
-    <ClCompile Include="homework_09_01.cpp" />
-    <ClCompile Include="homework_09_02.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

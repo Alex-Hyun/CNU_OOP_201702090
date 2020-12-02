@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 /*
  * INCLUDE LIBRARIES
  */
@@ -16,14 +16,14 @@ using namespace std;
  */
 class Console {
 private:
-	static Console* instance; //Console¿¡ ´ëÇÑ À¯ÀÏÇÑ ÀÎ½ºÅÏ½º
-	vector<string> newLines; //ÇöÀç º¯°æÁßÀÎ ¶óÀÎµéÀ» ÀúÀåÇÏ´Â ÄÁÅ×ÀÌ³Ê
+	static Console* instance; //Consoleì— ëŒ€í•œ ìœ ì¼í•œ ì¸ìŠ¤í„´ìŠ¤
+	vector<string> newLines; //í˜„ì¬ ë³€ê²½ì¤‘ì¸ ë¼ì¸ë“¤ì„ ì €ì¥í•˜ëŠ” ì»¨í…Œì´ë„ˆ
 
-	int current_cursor; //ÇöÀç Ãâ·Â ÁßÀÎ ¹®ÀÚ¿­ÀÇ Ã¹ ´Ü¾îÀÇ º¤ÅÍ¿¡¼­ÀÇ index¸¦ ±â¾ïÇÏ´Â Ä¿¼­ º¯¼ö
-	int next_cursor; //´ÙÀ½ Ãâ·Â¹® ¹®ÀÚ¿­ÀÇ Ã¹ ´Ü¾îÀÇ º¤ÅÍ¿¡¼­ÀÇ index¸¦ ±â¾ïÇÏ´Â Ä¿¼­ º¯¼ö
+	int current_cursor; //í˜„ì¬ ì¶œë ¥ ì¤‘ì¸ ë¬¸ìì—´ì˜ ì²« ë‹¨ì–´ì˜ ë²¡í„°ì—ì„œì˜ indexë¥¼ ê¸°ì–µí•˜ëŠ” ì»¤ì„œ ë³€ìˆ˜
+	int next_cursor; //ë‹¤ìŒ ì¶œë ¥ë¬¸ ë¬¸ìì—´ì˜ ì²« ë‹¨ì–´ì˜ ë²¡í„°ì—ì„œì˜ indexë¥¼ ê¸°ì–µí•˜ëŠ” ì»¤ì„œ ë³€ìˆ˜
 
 	/*
-	 * Singleton Design Pattern¿¡ µû¸¥ private »ı¼ºÀÚ
+	 * Singleton Design Patternì— ë”°ë¥¸ private ìƒì„±ì
    	 */
 	Console() {
 		instance = nullptr;
@@ -33,32 +33,32 @@ private:
 
 public:
 	/*
-	 * ¹®ÀÚ¿­ ÃÊ±âÈ­, Ãâ·Â, ¸í·É¾î ÀÔ·Â °ü·Ã ÇÔ¼ö - newLines.cpp
+	 * ë¬¸ìì—´ ì´ˆê¸°í™”, ì¶œë ¥, ëª…ë ¹ì–´ ì…ë ¥ ê´€ë ¨ í•¨ìˆ˜ - newLines.cpp
 	 */
-	static Console* getInstance() {  //À¯ÀÏÇÑ ÀÎ½ºÅÏ½º¸¦ ¾ò´Â ÇÔ¼ö, static ÇÔ¼öÀÌ±â ¶§¹®¿¡ Çì´õÆÄÀÏ¿¡ Á¤ÀÇÇÑ´Ù.
+	static Console* getInstance() {  //ìœ ì¼í•œ ì¸ìŠ¤í„´ìŠ¤ë¥¼ ì–»ëŠ” í•¨ìˆ˜, static í•¨ìˆ˜ì´ê¸° ë•Œë¬¸ì— í—¤ë”íŒŒì¼ì— ì •ì˜í•œë‹¤.
 		if (instance == nullptr)
 			instance = new Console();
 
 		return instance;
 	}
-	void initializeVector(); //ÆÄÀÏ ½Ã½ºÅÛ¿¡¼­ ¶óÀÎÀ» ÀĞ¾î¿Í º¤ÅÍ¿¡ ´Ü¾î ´ÜÀ§·Î »ğÀÔÇÏ°í Ä¿¼­ÀÇ À§Ä¡¸¦ Á¤ÀÇÇÑ´Ù.
-	void printConsole(string consoleMessage); //ÇöÀç º¤ÅÍÀÇ °ªÀ» ±âÁØÀ¸·Î ÄÜ¼ÖÃ¢À» Ãâ·ÂÇÑ´Ù.
-	void printConsole_line(); //printConsole()¿¡¼­ »ç¿ëÇÏ´Â ÇÔ¼ö, ±¸¿ª ±¸ºĞ¿ë ¼±À» Ãâ·Â
-	string nextInput(); //´ÙÀ½ ¸í·ÉÀ» ÀÔ·Â¹Ş°í ÇØ¼®ÇÑ´Ù.ÇØ¼®ÇÑ ¸í·É´ë·Î ÇÔ¼ö¸¦ ½ÇÇà
-	vector<string> checkError(string input); //ÀÔ·ÂµÈ ¸í·É¾îÀÇ ¿À·ù ¿©ºÎ¸¦ Ã¼Å©ÇÏ°í ¸í·É¾î¸¦ splitÇÑ inputSplitÀ» Á¦°øÇÑ´Ù.
-	void checkNumOfParameterAndSplitInput(string& anInput, vector<string>& anInputSplit); //¸í·É¾î Á¾·ù¿¡ ¸Â´Â ÀÎÀÚÀÇ °³¼ö°¡ ÀÔ·ÂµÇ¾ú´ÂÁö È®ÀÎÇÏ°í
-	bool is_integer(string test); //ÁÖ¾îÁø stringÀÌ Á¤¼öÀÎÁö¸¦ ¹İÈ¯ÇÏ´Â ÇÔ¼ö
-	int stringToInt(string test); //ÁÖ¾îÁø stringÀ» Á¤¼ö·Î º¯È¯ÇÑ´Ù.
+	void initializeVector(); //íŒŒì¼ ì‹œìŠ¤í…œì—ì„œ ë¼ì¸ì„ ì½ì–´ì™€ ë²¡í„°ì— ë‹¨ì–´ ë‹¨ìœ„ë¡œ ì‚½ì…í•˜ê³  ì»¤ì„œì˜ ìœ„ì¹˜ë¥¼ ì •ì˜í•œë‹¤.
+	void printConsole(string consoleMessage); //í˜„ì¬ ë²¡í„°ì˜ ê°’ì„ ê¸°ì¤€ìœ¼ë¡œ ì½˜ì†”ì°½ì„ ì¶œë ¥í•œë‹¤.
+	void printConsole_line(); //printConsole()ì—ì„œ ì‚¬ìš©í•˜ëŠ” í•¨ìˆ˜, êµ¬ì—­ êµ¬ë¶„ìš© ì„ ì„ ì¶œë ¥
+	string nextInput(); //ë‹¤ìŒ ëª…ë ¹ì„ ì…ë ¥ë°›ê³  í•´ì„í•œë‹¤.í•´ì„í•œ ëª…ë ¹ëŒ€ë¡œ í•¨ìˆ˜ë¥¼ ì‹¤í–‰
+	vector<string> checkError(string input); //ì…ë ¥ëœ ëª…ë ¹ì–´ì˜ ì˜¤ë¥˜ ì—¬ë¶€ë¥¼ ì²´í¬í•˜ê³  ëª…ë ¹ì–´ë¥¼ splití•œ inputSplitì„ ì œê³µí•œë‹¤.
+	void checkNumOfParameterAndSplitInput(string& anInput, vector<string>& anInputSplit); //ëª…ë ¹ì–´ ì¢…ë¥˜ì— ë§ëŠ” ì¸ìì˜ ê°œìˆ˜ê°€ ì…ë ¥ë˜ì—ˆëŠ”ì§€ í™•ì¸í•˜ê³ 
+	bool is_integer(string test); //ì£¼ì–´ì§„ stringì´ ì •ìˆ˜ì¸ì§€ë¥¼ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜
+	int stringToInt(string test); //ì£¼ì–´ì§„ stringì„ ì •ìˆ˜ë¡œ ë³€í™˜í•œë‹¤.
 
 	/*
-	 * ¸í·É¾î ±â´É ±¸Çö °ü·Ã ÇÔ¼ö - functions.cpp
+	 * ëª…ë ¹ì–´ ê¸°ëŠ¥ êµ¬í˜„ ê´€ë ¨ í•¨ìˆ˜ - functions.cpp
 	 */
-	vector<string>::iterator givenIterator(int line, int word); //º¤ÅÍ¿¡¼­ ÀÔ·ÂÇÑ line, word¸¦ Ã£°í ÇØ´ç ¹İº¹ÀÚ¸¦ ¸®ÅÏÇÑ´Ù.
-	string i_insertWord(vector<string> inputSplit); //ÀÔ·ÂÇÑ ¶óÀÎ°ú ´Ü¾îµÚ¿¡ ¹®ÀÚ¿­À» »ğÀÔÇÑ´Ù.
-	string d_deleteWord(vector<string> inputSplit); //ÀÔ·ÂÇÑ ¶óÀÎ°ú ´Ü¾îÀÇ ¿ø¼ÒÀ» »èÁ¦ÇÑ´Ù.
-	string s_realign(vector<string> inputSplit); //ÀÔ·ÂÇÑ ¹®ÀÚ¿­À» ÀüÃ¼ ÆÄÀÏ¿¡¼­ Ã£¾Æ ÄÜ¼ÖÀÇ ¸Ç ¾ÕÀ¸·Î À§Ä¡½ÃÅ²´Ù.
-	string c_changeWord(vector<string> inputSplit); //ÀÔ·ÂÇÑ Ã¹ ¹øÂ° ¹®ÀÚ¿­À» ¸ğµÎ µÎ ¹øÂ° ¹®ÀÚ¿­·Î º¯°æÇÑ´Ù.
-	string t_saveAndExit(); //Áö±İ±îÁö ÀÛ¾÷ÇÑ ³»¿ëÀ» txt ÆÄÀÏ¿¡ ÀúÀåÇÏ°í ÄÜ¼ÖÀ» Á¾·áÇÑ´Ù.
-	string n_nextPage(); //´ÙÀ½ ÆäÀÌÁö¸¦ Ãâ·ÂÇÑ´Ù.
-	string p_previousPage(bool usedByNextPageFunc); //ÀÌÀü ÆäÀÌÁö¸¦ Ãâ·ÂÇÑ´Ù.
+	vector<string>::iterator givenIterator(int line, int word); //ë²¡í„°ì—ì„œ ì…ë ¥í•œ line, wordë¥¼ ì°¾ê³  í•´ë‹¹ ë°˜ë³µìë¥¼ ë¦¬í„´í•œë‹¤.
+	string i_insertWord(vector<string> inputSplit); //ì…ë ¥í•œ ë¼ì¸ê³¼ ë‹¨ì–´ë’¤ì— ë¬¸ìì—´ì„ ì‚½ì…í•œë‹¤.
+	string d_deleteWord(vector<string> inputSplit); //ì…ë ¥í•œ ë¼ì¸ê³¼ ë‹¨ì–´ì˜ ì›ì†Œì„ ì‚­ì œí•œë‹¤.
+	string s_realign(vector<string> inputSplit); //ì…ë ¥í•œ ë¬¸ìì—´ì„ ì „ì²´ íŒŒì¼ì—ì„œ ì°¾ì•„ ì½˜ì†”ì˜ ë§¨ ì•ìœ¼ë¡œ ìœ„ì¹˜ì‹œí‚¨ë‹¤.
+	string c_changeWord(vector<string> inputSplit); //ì…ë ¥í•œ ì²« ë²ˆì§¸ ë¬¸ìì—´ì„ ëª¨ë‘ ë‘ ë²ˆì§¸ ë¬¸ìì—´ë¡œ ë³€ê²½í•œë‹¤.
+	string t_saveAndExit(); //ì§€ê¸ˆê¹Œì§€ ì‘ì—…í•œ ë‚´ìš©ì„ txt íŒŒì¼ì— ì €ì¥í•˜ê³  ì½˜ì†”ì„ ì¢…ë£Œí•œë‹¤.
+	string n_nextPage(); //ë‹¤ìŒ í˜ì´ì§€ë¥¼ ì¶œë ¥í•œë‹¤.
+	string p_previousPage(bool usedByNextPageFunc); //ì´ì „ í˜ì´ì§€ë¥¼ ì¶œë ¥í•œë‹¤.
 };

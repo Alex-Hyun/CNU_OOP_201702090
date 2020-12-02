@@ -1,112 +1,112 @@
-#include "newLines.h"
+ï»¿#include "newLines.h"
 
 /*
- * givenIterator() - º¤ÅÍ¿¡¼­ ÀÔ·ÂÇÑ line, word¸¦ Ã£°í ÇØ´ç ¹İº¹ÀÚ¸¦ ¸®ÅÏÇÑ´Ù.
+ * givenIterator() - ë²¡í„°ì—ì„œ ì…ë ¥í•œ line, wordë¥¼ ì°¾ê³  í•´ë‹¹ ë°˜ë³µìë¥¼ ë¦¬í„´í•œë‹¤.
  */
 vector<string>::iterator Console::givenIterator(int line, int word) {
 	int givenLine = line;
 	int givenWord = word;
 
-	//ÇöÀç cursor°¡ °®´Â index¸¸Å­ ¹İº¹ÀÚ¸¦ ÀÌµ¿½ÃÅ²´Ù.
+	//í˜„ì¬ cursorê°€ ê°–ëŠ” indexë§Œí¼ ë°˜ë³µìë¥¼ ì´ë™ì‹œí‚¨ë‹¤.
 	vector<string>::iterator itr = newLines.begin();
 	for (int c = current_cursor; c > 0; c--) {
 		itr++;
 	}
 
-	//ÇöÀç itr´Â cursor¿Í µ¿±âÈ­ µÇ¾ú´Ù.
-	//ÀÌÁ¦ º¤ÅÍ¿¡¼­ ÁÖ¾îÁø line, wordÀÇ ´Ü¾î¸¦ Ã£´Â´Ù.
+	//í˜„ì¬ itrëŠ” cursorì™€ ë™ê¸°í™” ë˜ì—ˆë‹¤.
+	//ì´ì œ ë²¡í„°ì—ì„œ ì£¼ì–´ì§„ line, wordì˜ ë‹¨ì–´ë¥¼ ì°¾ëŠ”ë‹¤.
 
-	//¸ÕÀú lineÀ» Ã£´Â´Ù.
+	//ë¨¼ì € lineì„ ì°¾ëŠ”ë‹¤.
 	int byteCount = 0;
 	while ((givenLine - 1) > 0) {
-		byteCount += itr->length(); //byteCount¿¡ ÇöÀç wordÀÇ ±æÀÌ¸¦ ÀúÀåÇÑ´Ù.
+		byteCount += itr->length(); //byteCountì— í˜„ì¬ wordì˜ ê¸¸ì´ë¥¼ ì €ì¥í•œë‹¤.
 
-		if (byteCount <= 75) { //byteCount´Â 75¸¦ ³ÑÀ» ¼ö ¾ø´Ù.
-			byteCount += 1; //byteCount¿¡ °ø¹éÀ» Ãß°¡ÇØ¼­ °è»ê
+		if (byteCount <= 75) { //byteCountëŠ” 75ë¥¼ ë„˜ì„ ìˆ˜ ì—†ë‹¤.
+			byteCount += 1; //byteCountì— ê³µë°±ì„ ì¶”ê°€í•´ì„œ ê³„ì‚°
 		}
-		else { //byteCount°¡ 75¸¦ ³Ñ¾î lineÀÌ ¿Ï¼ºµÊ
-			//byteCount ÃÊ±âÈ­
+		else { //byteCountê°€ 75ë¥¼ ë„˜ì–´ lineì´ ì™„ì„±ë¨
+			//byteCount ì´ˆê¸°í™”
 			byteCount = 0;
-			//»õ·Î¿î byteCount¿¡ ÇöÀç wordÀÇ ±æÀÌ Ãß°¡
+			//ìƒˆë¡œìš´ byteCountì— í˜„ì¬ wordì˜ ê¸¸ì´ ì¶”ê°€
 			byteCount += itr->length() + 1;
-			//line 1 °¨¼Ò
+			//line 1 ê°ì†Œ
 			givenLine--;
 		}
 
-		//´ÙÀ½ ´Ü¾î·Î ÀÌµ¿
+		//ë‹¤ìŒ ë‹¨ì–´ë¡œ ì´ë™
 		itr++;
 	}
-	// Ã¹ ¹øÂ° line¿¡¼­ Å½»öÀ» ÇÏ´Â °æ¿ì¸¦ Á¦¿ÜÇÏ°í (while-loopÀ» ¼öÇàÇÏÁö ¾ÊÀ½)
-	// itr°¡ for¹®¿¡ ÀÇÇØ ÇÑ ¹ø ´õ ´õÇØÁö´Â °ÍÀ» º¸Á¤ÇÑ´Ù. (lineCount°¡ 20À» ÃÊ°úÇØµµ ¸¶Áö¸·¿¡ ÇÑ ¹ø ´õ ´õÇØÁø´Ù.)
+	// ì²« ë²ˆì§¸ lineì—ì„œ íƒìƒ‰ì„ í•˜ëŠ” ê²½ìš°ë¥¼ ì œì™¸í•˜ê³  (while-loopì„ ìˆ˜í–‰í•˜ì§€ ì•ŠìŒ)
+	// itrê°€ forë¬¸ì— ì˜í•´ í•œ ë²ˆ ë” ë”í•´ì§€ëŠ” ê²ƒì„ ë³´ì •í•œë‹¤. (lineCountê°€ 20ì„ ì´ˆê³¼í•´ë„ ë§ˆì§€ë§‰ì— í•œ ë²ˆ ë” ë”í•´ì§„ë‹¤.)
 	if (line != 1) itr--;
 
-	//lineÀ» Ã£¾Ò´Ù. ÀÌÁ¦ word¸¦ Ã£´Â´Ù. ¸¶Âù°¡Áö·Î byteCount¸¦ ´õÇØÁÖ¸ç Å½»öÀ» ÁøÇàÇÑ´Ù.
-	//¸¸¾à word¸¦ Ã£´Ù°¡ byteCount°¡ 75¸¦ ÃÊ°úÇÏ¸é ´ÙÀ½ ¶óÀÎÀ¸·Î ³Ñ¾î°£ °ÍÀ¸·Î °£ÁÖÇÏ°í ¿¡·¯¸¦ Ãâ·ÂÇØ¾ß ÇÑ´Ù.
-	//ÀÌ¸¦ À§ÇØ byteCount º¯¼ö¸¦ ¸ÕÀú ÃÊ±âÈ­ ÇØÁØ´Ù.
+	//lineì„ ì°¾ì•˜ë‹¤. ì´ì œ wordë¥¼ ì°¾ëŠ”ë‹¤. ë§ˆì°¬ê°€ì§€ë¡œ byteCountë¥¼ ë”í•´ì£¼ë©° íƒìƒ‰ì„ ì§„í–‰í•œë‹¤.
+	//ë§Œì•½ wordë¥¼ ì°¾ë‹¤ê°€ byteCountê°€ 75ë¥¼ ì´ˆê³¼í•˜ë©´ ë‹¤ìŒ ë¼ì¸ìœ¼ë¡œ ë„˜ì–´ê°„ ê²ƒìœ¼ë¡œ ê°„ì£¼í•˜ê³  ì—ëŸ¬ë¥¼ ì¶œë ¥í•´ì•¼ í•œë‹¤.
+	//ì´ë¥¼ ìœ„í•´ byteCount ë³€ìˆ˜ë¥¼ ë¨¼ì € ì´ˆê¸°í™” í•´ì¤€ë‹¤.
 	byteCount = 0;
 	for (; givenWord > 0; givenWord--) {
 		itr++;
 		byteCount += itr->length() + 1;
 		if (byteCount > 75) {
-			throw string("¸í·É¾î°¡ ¿Ã¹Ù¸£Áö ¾Ê½À´Ï´Ù. - ") + to_string(line) + string("¶óÀÎ¿¡´Â ")
-				+ to_string(word) + string("¹øÂ° ´Ü¾î°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù!");
+			throw string("ëª…ë ¹ì–´ê°€ ì˜¬ë°”ë¥´ì§€ ì•ŠìŠµë‹ˆë‹¤. - ") + to_string(line) + string("ë¼ì¸ì—ëŠ” ")
+				+ to_string(word) + string("ë²ˆì§¸ ë‹¨ì–´ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤!");
 		}
 	}
 
-	//insertÀÇ °æ¿ì givenWord°¡ 0ÀÌ µÉ ¼öµµ ÀÖÀ¸¹Ç·Î for-loopÀ» ¸¶Ä¡°í itr¿¡¼­ 1À» »©ÁØ´Ù.
-	//ÀÌ·¸°Ô ÇÏ¸é givenWord°¡ 1ÀÏ ¶§ ÇØ´ç ¶óÀÎÀÇ Ã¹ ¹øÂ° ´Ü¾î¸¦ °¡¸®Å°°Ô µÈ´Ù.
+	//insertì˜ ê²½ìš° givenWordê°€ 0ì´ ë  ìˆ˜ë„ ìˆìœ¼ë¯€ë¡œ for-loopì„ ë§ˆì¹˜ê³  itrì—ì„œ 1ì„ ë¹¼ì¤€ë‹¤.
+	//ì´ë ‡ê²Œ í•˜ë©´ givenWordê°€ 1ì¼ ë•Œ í•´ë‹¹ ë¼ì¸ì˜ ì²« ë²ˆì§¸ ë‹¨ì–´ë¥¼ ê°€ë¦¬í‚¤ê²Œ ëœë‹¤.
 	itr--;
 
-	//ÁÖ¾îÁø lineÀÇ ÁÖ¾îÁø word¸¦ °¡¸®Å°´Â Æ÷ÀÎÅÍ¸¦ ¹İÈ¯ÇÑ´Ù.
+	//ì£¼ì–´ì§„ lineì˜ ì£¼ì–´ì§„ wordë¥¼ ê°€ë¦¬í‚¤ëŠ” í¬ì¸í„°ë¥¼ ë°˜í™˜í•œë‹¤.
 	return itr;
 }
 
 /*
- * i_insertWord() - ÀÔ·ÂÇÑ ¶óÀÎ°ú ´Ü¾îµÚ¿¡ ¹®ÀÚ¿­À» »ğÀÔÇÑ´Ù.
+ * i_insertWord() - ì…ë ¥í•œ ë¼ì¸ê³¼ ë‹¨ì–´ë’¤ì— ë¬¸ìì—´ì„ ì‚½ì…í•œë‹¤.
  */
 string Console::i_insertWord(vector<string> inputSplit) {
-	//insert ½ÇÇà
-	int line = stringToInt(inputSplit[1]); //Ãß°¡ÇÒ ´Ü¾îÀÇ ¶óÀÎ ¹øÈ£
-	int word = stringToInt(inputSplit[2]); //Ãß°¡ÇÒ ´Ü¾î Á÷ÀüÀÇ ´Ü¾î ¹øÈ£
+	//insert ì‹¤í–‰
+	int line = stringToInt(inputSplit[1]); //ì¶”ê°€í•  ë‹¨ì–´ì˜ ë¼ì¸ ë²ˆí˜¸
+	int word = stringToInt(inputSplit[2]); //ì¶”ê°€í•  ë‹¨ì–´ ì§ì „ì˜ ë‹¨ì–´ ë²ˆí˜¸
 	vector<string>::iterator itr;
 
-	//¸ÕÀú line == 1 ÀÌ°í word == 0ÀÌ¸é¼­ ÇöÀç Ãâ·Â ÁßÀÎ ÆäÀÌÁö°¡ Ã¹ ÆäÀÌÁöÀÎ °æ¿ì
-	//givenIterator() ÇÔ¼ö¿¡¼­ Æ÷ÀÎÅÍ ¿¡·¯·Î ÀÎÇØ Ã³¸®°¡ ºÒ°¡ÇÏ¹Ç·Î if¹®À» ÅëÇØ Á÷Á¢ Ã³¸®ÇØÁØ´Ù.
+	//ë¨¼ì € line == 1 ì´ê³  word == 0ì´ë©´ì„œ í˜„ì¬ ì¶œë ¥ ì¤‘ì¸ í˜ì´ì§€ê°€ ì²« í˜ì´ì§€ì¸ ê²½ìš°
+	//givenIterator() í•¨ìˆ˜ì—ì„œ í¬ì¸í„° ì—ëŸ¬ë¡œ ì¸í•´ ì²˜ë¦¬ê°€ ë¶ˆê°€í•˜ë¯€ë¡œ ifë¬¸ì„ í†µí•´ ì§ì ‘ ì²˜ë¦¬í•´ì¤€ë‹¤.
 	if ((line == 1 && word == 0) && current_cursor == 0) {
 		newLines.emplace(newLines.begin(), inputSplit[3]);
-		return inputSplit[1] + string("¹øÂ° ¶óÀÎÀÇ ") + inputSplit[2]
-			+ string("¹øÂ° ´Ü¾î µÚ¿¡ ´Ü¾î \"") + inputSplit[3] + string("\"À» »ğÀÔÇß½À´Ï´Ù");
+		return inputSplit[1] + string("ë²ˆì§¸ ë¼ì¸ì˜ ") + inputSplit[2]
+			+ string("ë²ˆì§¸ ë‹¨ì–´ ë’¤ì— ë‹¨ì–´ \"") + inputSplit[3] + string("\"ì„ ì‚½ì…í–ˆìŠµë‹ˆë‹¤");
 	}
-	//³ª¸ÓÁö °æ¿ì¿¡´Â inputSplitÀ» ÅëÇØ ÁÖ¾îÁø ¸í·É¾îÀÇ ÀÎÀÚ¸¦ line, word·Î °®´Â ¹İº¹ÀÚ¸¦ ¾ò´Â´Ù.
+	//ë‚˜ë¨¸ì§€ ê²½ìš°ì—ëŠ” inputSplitì„ í†µí•´ ì£¼ì–´ì§„ ëª…ë ¹ì–´ì˜ ì¸ìë¥¼ line, wordë¡œ ê°–ëŠ” ë°˜ë³µìë¥¼ ì–»ëŠ”ë‹¤.
 	else {
-		itr = givenIterator(line, word); //ÀÎÀÚ·Î ³ÖÀº line°ú word°¡ °¡¸®Å°´Â ´Ü¾î¸¦ ¸®ÅÏÇÑ´Ù.
-		//ÇØ´ç ¹İº¹ÀÚ µÚ¿¡ ´Ü¾î¸¦ »ğÀÔÇØ¾ß ÇÏ¹Ç·Î itr¿¡ 1À» ´õÇØÁØ´Ù.
+		itr = givenIterator(line, word); //ì¸ìë¡œ ë„£ì€ lineê³¼ wordê°€ ê°€ë¦¬í‚¤ëŠ” ë‹¨ì–´ë¥¼ ë¦¬í„´í•œë‹¤.
+		//í•´ë‹¹ ë°˜ë³µì ë’¤ì— ë‹¨ì–´ë¥¼ ì‚½ì…í•´ì•¼ í•˜ë¯€ë¡œ itrì— 1ì„ ë”í•´ì¤€ë‹¤.
 		itr += 1;
 		newLines.emplace(itr, inputSplit[3]);
-		return inputSplit[1] + string("¹øÂ° ¶óÀÎÀÇ ") + inputSplit[2]
-			+ string("¹øÂ° ´Ü¾î µÚ¿¡ ´Ü¾î \"") + inputSplit[3] + string("\"À» »ğÀÔÇß½À´Ï´Ù");
+		return inputSplit[1] + string("ë²ˆì§¸ ë¼ì¸ì˜ ") + inputSplit[2]
+			+ string("ë²ˆì§¸ ë‹¨ì–´ ë’¤ì— ë‹¨ì–´ \"") + inputSplit[3] + string("\"ì„ ì‚½ì…í–ˆìŠµë‹ˆë‹¤");
 	}
 
 }
 
 /*
- * d_deleteWord() - ÀÔ·ÂÇÑ ¶óÀÎ°ú ´Ü¾îÀÇ ¿ø¼ÒÀ» »èÁ¦ÇÑ´Ù.
+ * d_deleteWord() - ì…ë ¥í•œ ë¼ì¸ê³¼ ë‹¨ì–´ì˜ ì›ì†Œì„ ì‚­ì œí•œë‹¤.
  */
 string Console::d_deleteWord(vector<string> inputSplit) {
-	int line = stringToInt(inputSplit[1]); //Ãß°¡ÇÒ ´Ü¾îÀÇ ¶óÀÎ ¹øÈ£
-	int word = stringToInt(inputSplit[2]); //Ãß°¡ÇÒ ´Ü¾î Á÷ÀüÀÇ ´Ü¾î ¹øÈ£
+	int line = stringToInt(inputSplit[1]); //ì¶”ê°€í•  ë‹¨ì–´ì˜ ë¼ì¸ ë²ˆí˜¸
+	int word = stringToInt(inputSplit[2]); //ì¶”ê°€í•  ë‹¨ì–´ ì§ì „ì˜ ë‹¨ì–´ ë²ˆí˜¸
 
-	//inputSplitÀ» ÅëÇØ ÁÖ¾îÁø ¸í·É¾îÀÇ ÀÎÀÚ¸¦ line, word·Î °®´Â ¹İº¹ÀÚ¸¦ ¾ò´Â´Ù.
+	//inputSplitì„ í†µí•´ ì£¼ì–´ì§„ ëª…ë ¹ì–´ì˜ ì¸ìë¥¼ line, wordë¡œ ê°–ëŠ” ë°˜ë³µìë¥¼ ì–»ëŠ”ë‹¤.
 	vector<string>::iterator itr = givenIterator(line, word);
 
-	//ÇØ´ç ¹İº¹ÀÚ°¡ °¡¸®Å°´Â ´Ü¾î¸¦ »èÁ¦ÇÑ´Ù.
+	//í•´ë‹¹ ë°˜ë³µìê°€ ê°€ë¦¬í‚¤ëŠ” ë‹¨ì–´ë¥¼ ì‚­ì œí•œë‹¤.
 	newLines.erase(itr);
 
-	return inputSplit[1] + string("¹øÂ° ¶óÀÎÀÇ ") 
-		+ inputSplit[2] + string("¹øÂ° ´Ü¾î¸¦ »èÁ¦Çß½À´Ï´Ù.");
+	return inputSplit[1] + string("ë²ˆì§¸ ë¼ì¸ì˜ ") 
+		+ inputSplit[2] + string("ë²ˆì§¸ ë‹¨ì–´ë¥¼ ì‚­ì œí–ˆìŠµë‹ˆë‹¤.");
 }
 /*
-* s_realign() - ÀÔ·ÂÇÑ ¹®ÀÚ¿­À» ÀüÃ¼ ÆÄÀÏ¿¡¼­ Ã£¾Æ ÄÜ¼ÖÀÇ ¸Ç ¾ÕÀ¸·Î À§Ä¡½ÃÅ²´Ù.
+* s_realign() - ì…ë ¥í•œ ë¬¸ìì—´ì„ ì „ì²´ íŒŒì¼ì—ì„œ ì°¾ì•„ ì½˜ì†”ì˜ ë§¨ ì•ìœ¼ë¡œ ìœ„ì¹˜ì‹œí‚¨ë‹¤.
 */
 string Console::s_realign(vector<string> inputSplit) {
 	
@@ -114,30 +114,30 @@ string Console::s_realign(vector<string> inputSplit) {
 	for (vector<string>::iterator itr = newLines.begin(); itr != newLines.end(); itr++) {
 		newCursor++;
 		if (*itr == inputSplit[1]) {
-			//¸í·É¾î·Î ÁÖ¾îÁø ´Ü¾î¿Í ÀÏÄ¡ÇÏ´Â ´Ü¾î¸¦ Ã£À½
-			//Àü¿ªº¯¼ö cursor¸¦ newCursor·Î º¯°æÇÑ´Ù.
+			//ëª…ë ¹ì–´ë¡œ ì£¼ì–´ì§„ ë‹¨ì–´ì™€ ì¼ì¹˜í•˜ëŠ” ë‹¨ì–´ë¥¼ ì°¾ìŒ
+			//ì „ì—­ë³€ìˆ˜ cursorë¥¼ newCursorë¡œ ë³€ê²½í•œë‹¤.
 			current_cursor = newCursor;
-			return string("ÁÖ¾îÁø ´Ü¾î \"") + inputSplit[1] + string("\"À» Ã£¾Ò½À´Ï´Ù. ÄÜ¼ÖÀÇ Ã¹ ¶óÀÎ¿¡ Ãâ·ÂÇÕ´Ï´Ù.");
+			return string("ì£¼ì–´ì§„ ë‹¨ì–´ \"") + inputSplit[1] + string("\"ì„ ì°¾ì•˜ìŠµë‹ˆë‹¤. ì½˜ì†”ì˜ ì²« ë¼ì¸ì— ì¶œë ¥í•©ë‹ˆë‹¤.");
 		}
 	}
-	throw string("ÁÖ¾îÁø ´Ü¾î \"") + inputSplit[1] + string("\"Àº ÆÄÀÏ¿¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù!");
+	throw string("ì£¼ì–´ì§„ ë‹¨ì–´ \"") + inputSplit[1] + string("\"ì€ íŒŒì¼ì— ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤!");
 }
 /*
-* c_changeWord() - ÀÔ·ÂÇÑ Ã¹ ¹øÂ° ¹®ÀÚ¿­À» ¸ğµÎ µÎ ¹øÂ° ¹®ÀÚ¿­·Î º¯°æÇÑ´Ù.
+* c_changeWord() - ì…ë ¥í•œ ì²« ë²ˆì§¸ ë¬¸ìì—´ì„ ëª¨ë‘ ë‘ ë²ˆì§¸ ë¬¸ìì—´ë¡œ ë³€ê²½í•œë‹¤.
 */
 string Console::c_changeWord(vector<string> inputSplit) {
-	//¸ğµç inputSplit[1]À» Ã£¾Æ inputSplit[2]·Î º¯°æÇÑ´Ù.
+	//ëª¨ë“  inputSplit[1]ì„ ì°¾ì•„ inputSplit[2]ë¡œ ë³€ê²½í•œë‹¤.
 	for (int c = newLines.size(); c > 0; c--) {
 		if (newLines.at(c - 1) == inputSplit[1]) {
 			newLines.at(c - 1) = (inputSplit[2]);
 		}
 	}
 
-	return string("ÀüÃ¼ ÅØ½ºÆ®¿¡¼­ ¸ğµç ")
-		+ inputSplit[1] + string("À» Ã£¾Æ ") + inputSplit[2] + string("·Î º¯°æÇß½À´Ï´Ù.");
+	return string("ì „ì²´ í…ìŠ¤íŠ¸ì—ì„œ ëª¨ë“  ")
+		+ inputSplit[1] + string("ì„ ì°¾ì•„ ") + inputSplit[2] + string("ë¡œ ë³€ê²½í–ˆìŠµë‹ˆë‹¤.");
 }
 /*
-* t_saveAndExit() - Áö±İ±îÁö ÀÛ¾÷ÇÑ ³»¿ëÀ» txt ÆÄÀÏ¿¡ ÀúÀåÇÏ°í ÄÜ¼ÖÀ» Á¾·áÇÑ´Ù.
+* t_saveAndExit() - ì§€ê¸ˆê¹Œì§€ ì‘ì—…í•œ ë‚´ìš©ì„ txt íŒŒì¼ì— ì €ì¥í•˜ê³  ì½˜ì†”ì„ ì¢…ë£Œí•œë‹¤.
 */
 string Console::t_saveAndExit() {
 	ofstream file("test.txt");
@@ -145,7 +145,7 @@ string Console::t_saveAndExit() {
 	if (file.is_open()) {
 		for (int i = newLines.size(); i > 0; i--) {
 			if (i == 1) {
-				//¸¶Áö¸·¿¡´Â °ø¹é Á¦¿ÜÇÏ°í »ğÀÔ
+				//ë§ˆì§€ë§‰ì—ëŠ” ê³µë°± ì œì™¸í•˜ê³  ì‚½ì…
 				file << newLines[newLines.size() - i];
 				break;
 			}
@@ -154,86 +154,86 @@ string Console::t_saveAndExit() {
 		file.close();
 	}
 	else {
-		throw string("ÀÛ¾÷ ³»¿ëÀ» ÆÄÀÏ¿¡ ÀúÀåÇÏ´Âµ¥ ½ÇÆĞÇÏ¿´½À´Ï´Ù!");
+		throw string("ì‘ì—… ë‚´ìš©ì„ íŒŒì¼ì— ì €ì¥í•˜ëŠ”ë° ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤!");
 	}
 
-	throw int(1); //nextInput()À¸·Î ÄÜ¼ÖÀÇ Á¾·á¸¦ ¾Ë¸°´Ù.
+	throw int(1); //nextInput()ìœ¼ë¡œ ì½˜ì†”ì˜ ì¢…ë£Œë¥¼ ì•Œë¦°ë‹¤.
 
-	return string(""); //Á¤»ó Èå¸§ÀÌ¶ó¸é ÀÌ°÷¿¡´Â µµ´ŞÇÏÁö ¾Ê´Â´Ù.
+	return string(""); //ì •ìƒ íë¦„ì´ë¼ë©´ ì´ê³³ì—ëŠ” ë„ë‹¬í•˜ì§€ ì•ŠëŠ”ë‹¤.
 }
 /*
-* n_nextPage() - ´ÙÀ½ ÆäÀÌÁö¸¦ Ãâ·ÂÇÑ´Ù.
+* n_nextPage() - ë‹¤ìŒ í˜ì´ì§€ë¥¼ ì¶œë ¥í•œë‹¤.
 */
 string Console::n_nextPage() {
 	vector<string>::iterator itr = newLines.begin();
 
-	//print_consoleÀÌ ¹®ÀÚ¿­ÀÇ ¸¶Áö¸· ±îÁö Ãâ·ÂÀ» ¸¶Ä¡¸é next_consorÀÌ º¤ÅÍÀÇ size¸¦ ¹ş¾î³ª°Ô µÈ´Ù.
-	//µû¶ó¼­ ÀÌ¶§´Â ¹Ù·Î p_previousPage()ÇÔ¼ö¸¦ ½ÇÇàÇØÁØ´Ù.
+	//print_consoleì´ ë¬¸ìì—´ì˜ ë§ˆì§€ë§‰ ê¹Œì§€ ì¶œë ¥ì„ ë§ˆì¹˜ë©´ next_consorì´ ë²¡í„°ì˜ sizeë¥¼ ë²—ì–´ë‚˜ê²Œ ëœë‹¤.
+	//ë”°ë¼ì„œ ì´ë•ŒëŠ” ë°”ë¡œ p_previousPage()í•¨ìˆ˜ë¥¼ ì‹¤í–‰í•´ì¤€ë‹¤.
 	if (next_cursor > (signed int) newLines.size()) {
 		return p_previousPage(true);
 	}
 
-	//itrÀ» ´ÙÀ½ Ãâ·Â¹®ÀÇ Ã¹ ´Ü¾î¸¦ °¡¸®Å°µµ·Ï ÀÌµ¿½ÃÅ²´Ù.
+	//itrì„ ë‹¤ìŒ ì¶œë ¥ë¬¸ì˜ ì²« ë‹¨ì–´ë¥¼ ê°€ë¦¬í‚¤ë„ë¡ ì´ë™ì‹œí‚¨ë‹¤.
 	for (int c = next_cursor; c > 0; c--) {
 		itr++;
 	}
 
-	//Çö ½ÃÁ¡ÀÇ itr·Î ºÎÅÍ 20 ¶óÀÎÀÌ Á¸ÀçÇÏ´ÂÁö °è»êÇÑ´Ù.
-	//20 ¶óÀÎÀÌ itr ÀÌÈÄ¿¡ Á¸ÀçÇÏÁö ¾ÊÀ¸¸é ¸¶Áö¸· ´Ü¾î·Î ºÎÅÍ 20 ¶óÀÎÀ» Ãâ·ÂÇÏµµ·Ï cursor¸¦ Á¶Á¤ÇÑ´Ù.
+	//í˜„ ì‹œì ì˜ itrë¡œ ë¶€í„° 20 ë¼ì¸ì´ ì¡´ì¬í•˜ëŠ”ì§€ ê³„ì‚°í•œë‹¤.
+	//20 ë¼ì¸ì´ itr ì´í›„ì— ì¡´ì¬í•˜ì§€ ì•Šìœ¼ë©´ ë§ˆì§€ë§‰ ë‹¨ì–´ë¡œ ë¶€í„° 20 ë¼ì¸ì„ ì¶œë ¥í•˜ë„ë¡ cursorë¥¼ ì¡°ì •í•œë‹¤.
 	int byteCount = 0, lineCount = 1;
 
 	for (; itr != newLines.end(); itr++) {
-		if (lineCount <= 20) { //lineCount´Â 20À» ³ÑÀ» ¼ö ¾ø´Ù.
+		if (lineCount <= 20) { //lineCountëŠ” 20ì„ ë„˜ì„ ìˆ˜ ì—†ë‹¤.
 
-			byteCount += itr->length(); //byteCount¿¡ ÇöÀç wordÀÇ ±æÀÌ¸¦ ÀúÀåÇÑ´Ù.
+			byteCount += itr->length(); //byteCountì— í˜„ì¬ wordì˜ ê¸¸ì´ë¥¼ ì €ì¥í•œë‹¤.
 
-			if (byteCount <= 75) { //byteCount´Â 75¸¦ ³ÑÀ» ¼ö ¾ø´Ù.
-				byteCount += 1; //byteCount¿¡ °ø¹éÀ» Ãß°¡ÇØ¼­ °è»ê
+			if (byteCount <= 75) { //byteCountëŠ” 75ë¥¼ ë„˜ì„ ìˆ˜ ì—†ë‹¤.
+				byteCount += 1; //byteCountì— ê³µë°±ì„ ì¶”ê°€í•´ì„œ ê³„ì‚°
 			}
-			else { //byteCount°¡ 75¸¦ ³Ñ¾î lineÀÌ ¿Ï¼ºµÊ
-				//Count º¯¼ö Á¶Á¤
+			else { //byteCountê°€ 75ë¥¼ ë„˜ì–´ lineì´ ì™„ì„±ë¨
+				//Count ë³€ìˆ˜ ì¡°ì •
 				lineCount += 1;
-				//»õ·Î¿î byteCount¿¡ ÇöÀç wordÀÇ ±æÀÌ Ãß°¡
+				//ìƒˆë¡œìš´ byteCountì— í˜„ì¬ wordì˜ ê¸¸ì´ ì¶”ê°€
 				byteCount = itr->length() + 1;
 			}
 		}
-		else break; // lineCount°¡ 20ÀÌ µÇ¸é Á¾·á
+		else break; // lineCountê°€ 20ì´ ë˜ë©´ ì¢…ë£Œ
 	}
 
 	if (lineCount < 20) {
-		//´ÙÀ½ ÆäÀÌÁöÀÇ ±æÀÌ°¡ 20¶óÀÎ ¹Ì¸¸ÀÎ °æ¿ì
-		//p_previousPage()ÀÇ ÄÚµå¸¦ È°¿ëÇØ¼­ ¸¶Áö¸· 20¶óÀÎÀ» Ãâ·ÂÇÑ´Ù.
+		//ë‹¤ìŒ í˜ì´ì§€ì˜ ê¸¸ì´ê°€ 20ë¼ì¸ ë¯¸ë§Œì¸ ê²½ìš°
+		//p_previousPage()ì˜ ì½”ë“œë¥¼ í™œìš©í•´ì„œ ë§ˆì§€ë§‰ 20ë¼ì¸ì„ ì¶œë ¥í•œë‹¤.
 		return p_previousPage(true);
 	}
-	else { //´ÙÀ½ ÆäÀÌÁöÀÇ ±æÀÌ°¡ 20¶óÀÎ ÀÌ»óÀÎ °æ¿ì
-		current_cursor = next_cursor; //ÇöÀç Ä¿¼­¸¦ ´ÙÀ½ Ä¿¼­·Î Á¤»óÀûÀ¸·Î º¯°æÇÑ´Ù.
-		return string("´ÙÀ½ ÆäÀÌÁö¸¦ Ãâ·ÂÇÕ´Ï´Ù.");
+	else { //ë‹¤ìŒ í˜ì´ì§€ì˜ ê¸¸ì´ê°€ 20ë¼ì¸ ì´ìƒì¸ ê²½ìš°
+		current_cursor = next_cursor; //í˜„ì¬ ì»¤ì„œë¥¼ ë‹¤ìŒ ì»¤ì„œë¡œ ì •ìƒì ìœ¼ë¡œ ë³€ê²½í•œë‹¤.
+		return string("ë‹¤ìŒ í˜ì´ì§€ë¥¼ ì¶œë ¥í•©ë‹ˆë‹¤.");
 	}
 }
 /*
-* p_previousPage() - ÀÌÀü ÆäÀÌÁö¸¦ Ãâ·ÂÇÑ´Ù.
-* ÇöÀç Ãâ·Â ÁßÀÎ 1¶óÀÎÀÇ Ã¹ ´Ü¾îÀÇ ÀÌÀü ´Ü¾î¸¦ »õ·Î¿î Ãâ·ÂÀÇ ¸¶Áö¸· ´Ü¾î·Î Ãâ·ÂÇÏµµ·Ï cursor¸¦ Á¶Á¤ÇÑ´Ù.
+* p_previousPage() - ì´ì „ í˜ì´ì§€ë¥¼ ì¶œë ¥í•œë‹¤.
+* í˜„ì¬ ì¶œë ¥ ì¤‘ì¸ 1ë¼ì¸ì˜ ì²« ë‹¨ì–´ì˜ ì´ì „ ë‹¨ì–´ë¥¼ ìƒˆë¡œìš´ ì¶œë ¥ì˜ ë§ˆì§€ë§‰ ë‹¨ì–´ë¡œ ì¶œë ¥í•˜ë„ë¡ cursorë¥¼ ì¡°ì •í•œë‹¤.
 */
 string Console::p_previousPage(bool usedByNextPageFunc) {
 
 	if (current_cursor == 0) {
-		throw string("ÀÌÀü ÆäÀÌÁö°¡ ¾ø½À´Ï´Ù - Ã¹ ÆäÀÌÁö ÀÔ´Ï´Ù!");
+		throw string("ì´ì „ í˜ì´ì§€ê°€ ì—†ìŠµë‹ˆë‹¤ - ì²« í˜ì´ì§€ ì…ë‹ˆë‹¤!");
 	}
 
 	vector<string>::iterator itr = newLines.begin();
 
-	//ÀÌÀüÆäÀÌÁö¸¦ Ãâ·ÂÇÏ±â À§ÇØ ÀÌ ÇÔ¼ö¸¦ »ç¿ëÇÏ¸é 
-	//cursor¿Í itrÀ» Á¶Á¤ÇØ ÇöÀç cursorÀÇ Àü ´Ü¾î±îÁö Ãâ·ÂÇÏ°Ô µÇ°í
+	//ì´ì „í˜ì´ì§€ë¥¼ ì¶œë ¥í•˜ê¸° ìœ„í•´ ì´ í•¨ìˆ˜ë¥¼ ì‚¬ìš©í•˜ë©´ 
+	//cursorì™€ itrì„ ì¡°ì •í•´ í˜„ì¬ cursorì˜ ì „ ë‹¨ì–´ê¹Œì§€ ì¶œë ¥í•˜ê²Œ ë˜ê³ 
 	if (usedByNextPageFunc == false) {
 		for (int c = current_cursor; c > 0; c--) {
 			itr++;
 		}
 
 		itr--;
-		current_cursor--; //Çö ½ÃÁ¡¿¡¼­ itr¿Í cursor´Â »õ·Î¿î ÄÜ¼Ö Ãâ·ÂÀÇ °¡Àå ¸¶Áö¸· ´Ü¾î¸¦ °¡¸®Å²´Ù.
+		current_cursor--; //í˜„ ì‹œì ì—ì„œ itrì™€ cursorëŠ” ìƒˆë¡œìš´ ì½˜ì†” ì¶œë ¥ì˜ ê°€ì¥ ë§ˆì§€ë§‰ ë‹¨ì–´ë¥¼ ê°€ë¦¬í‚¨ë‹¤.
 	}
-	//nextPage()¿¡¼­ ¸¶Áö¸· 20 ¶óÀÎÀ» Ãâ·ÂÇÏ±â ÀÌ ÇÔ¼ö¸¦ »ç¿ëÇÏ¸é
-	//current_cursor°¡ º¤ÅÍÀÇ ¸¶Áö¸· ´Ü¾î¸¦ °¡¸®Å°°Ô µÈ´Ù.
+	//nextPage()ì—ì„œ ë§ˆì§€ë§‰ 20 ë¼ì¸ì„ ì¶œë ¥í•˜ê¸° ì´ í•¨ìˆ˜ë¥¼ ì‚¬ìš©í•˜ë©´
+	//current_cursorê°€ ë²¡í„°ì˜ ë§ˆì§€ë§‰ ë‹¨ì–´ë¥¼ ê°€ë¦¬í‚¤ê²Œ ëœë‹¤.
 	else {
 		itr = newLines.end() - 1;
 		current_cursor = newLines.size();
@@ -252,33 +252,33 @@ string Console::p_previousPage(bool usedByNextPageFunc) {
 				byteCount = itr->length() + 1;
 			}
 		}
-		else break; //20¶óÀÎÀ» ³Ñ¾î°¡¸é Å½»ö Á¾·á
+		else break; //20ë¼ì¸ì„ ë„˜ì–´ê°€ë©´ íƒìƒ‰ ì¢…ë£Œ
 
 		if (itr == newLines.begin()) {
-			//itr¿¡·¯¸¦ ¹æÁöÇÏ°íÀÚ begin()¿¡ µµ´ŞÇÏ¸é break·Î for-loopÀ» Å»ÃâÇÑ´Ù.
+			//itrì—ëŸ¬ë¥¼ ë°©ì§€í•˜ê³ ì begin()ì— ë„ë‹¬í•˜ë©´ breakë¡œ for-loopì„ íƒˆì¶œí•œë‹¤.
 			break;
 		}
 		current_cursor--;
 		itr--;
 	}
-	//for-loopÀÌ Á¾·áµÇ¾úÀ» ¶§ lineCountÀÇ °ªÀÌ 20¹Ì¸¸ÀÌ¸é ÇöÀç ÆäÀÌÁö ÀÌÀü¿¡ 20 ¶óÀÎÀÌ Á¸ÀçÇÏÁö ¾Ê´Â °ÍÀÌ´Ù.
-	//µû¶ó¼­ Ä¿¼­¸¦ ÆÄÀÏÀÇ Ã¹ ´Ü¾î·Î ÀÌµ¿½ÃÅ²´Ù.
+	//for-loopì´ ì¢…ë£Œë˜ì—ˆì„ ë•Œ lineCountì˜ ê°’ì´ 20ë¯¸ë§Œì´ë©´ í˜„ì¬ í˜ì´ì§€ ì´ì „ì— 20 ë¼ì¸ì´ ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ê²ƒì´ë‹¤.
+	//ë”°ë¼ì„œ ì»¤ì„œë¥¼ íŒŒì¼ì˜ ì²« ë‹¨ì–´ë¡œ ì´ë™ì‹œí‚¨ë‹¤.
 	if (lineCount < 20) {
 		current_cursor = 0;
-		return string("ÀÜ¿© ¶óÀÎÀÌ 20¶óÀÎ ¹Ì¸¸ÀÌ¹Ç·Î Ã¹ ÆäÀÌÁö¸¦ Ãâ·ÂÇÕ´Ï´Ù.");
+		return string("ì”ì—¬ ë¼ì¸ì´ 20ë¼ì¸ ë¯¸ë§Œì´ë¯€ë¡œ ì²« í˜ì´ì§€ë¥¼ ì¶œë ¥í•©ë‹ˆë‹¤.");
 	}
 
 	else {
-		//Ä¿¼­´Â ÀÇµµº¸´Ù ÇÑ ´Ü¾î ÀüÀ» °¡¸®Å²´Ù.
-		//µû¶ó¼­ ÇöÀç itrÀÌ °¡¸®Å°´Â À§Ä¡°¡ º¤ÅÍÀÇ Ã¹ ´Ü¾î°¡ ¾Æ´Ò °æ¿ì Ä¿¼­ À§Ä¡ Á¶Á¤
+		//ì»¤ì„œëŠ” ì˜ë„ë³´ë‹¤ í•œ ë‹¨ì–´ ì „ì„ ê°€ë¦¬í‚¨ë‹¤.
+		//ë”°ë¼ì„œ í˜„ì¬ itrì´ ê°€ë¦¬í‚¤ëŠ” ìœ„ì¹˜ê°€ ë²¡í„°ì˜ ì²« ë‹¨ì–´ê°€ ì•„ë‹ ê²½ìš° ì»¤ì„œ ìœ„ì¹˜ ì¡°ì •
 		if(itr != newLines.begin()) current_cursor++;
 
-		//¸Ş½ÃÁö Ãâ·Â °ü·Ã ÄÚµå
-		if (usedByNextPageFunc == false) { //previousPage()ÇÔ¼ö¿¡¼­ÀÇ ±âº» ¸®ÅÏ °ª
-			return string("ÀÌÀü ÆäÀÌÁö¸¦ Ãâ·ÂÇÕ´Ï´Ù.");
+		//ë©”ì‹œì§€ ì¶œë ¥ ê´€ë ¨ ì½”ë“œ
+		if (usedByNextPageFunc == false) { //previousPage()í•¨ìˆ˜ì—ì„œì˜ ê¸°ë³¸ ë¦¬í„´ ê°’
+			return string("ì´ì „ í˜ì´ì§€ë¥¼ ì¶œë ¥í•©ë‹ˆë‹¤.");
 		}
-		else { //nextPage() ÇÔ¼ö¿¡¼­ previousPage()ÀÇ ÄÚµå¸¦ »ç¿ëÇÒ ¶§ ¸®ÅÏ °ª
-			return string("´ÙÀ½ ÆäÀÌÁö°¡ 20¶óÀÎº¸´Ù Àû¾î ¸¶Áö¸· 20¶óÀÎÀ» Ãâ·ÂÇÕ´Ï´Ù.");
+		else { //nextPage() í•¨ìˆ˜ì—ì„œ previousPage()ì˜ ì½”ë“œë¥¼ ì‚¬ìš©í•  ë•Œ ë¦¬í„´ ê°’
+			return string("ë‹¤ìŒ í˜ì´ì§€ê°€ 20ë¼ì¸ë³´ë‹¤ ì ì–´ ë§ˆì§€ë§‰ 20ë¼ì¸ì„ ì¶œë ¥í•©ë‹ˆë‹¤.");
 		}
 
 	}

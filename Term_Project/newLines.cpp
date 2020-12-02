@@ -8,13 +8,12 @@ void Console::initializeVector() {
 	ifstream file("test.txt");
 
 	if (file.is_open()) {
-		while (file) {
-			while (getline(file, word, ' ')) { //file에서 공백을 기준으로 단어를 읽어온다.
-				newLines.push_back(word); //읽어온 단어를 모두 벡터에 push 한다.
-			}
+		while (getline(file, word, ' ')) { //file에서 공백을 기준으로 단어를 읽어온다.
+			newLines.push_back(word); //읽어온 단어를 모두 벡터에 push 한다.
 		}
 		file.close(); // 파일 닫기
 		current_cursor = 0; //커서 초기화
+		next_cursor = 0; //커서 초기화
 	}
 	else cout << "콘솔에서 작업할 파일을 불러오는데 실패하였습니다." << endl;
 }
@@ -52,15 +51,12 @@ void Console::printConsole(string consoleMessage) {
 			else { //byteCount가 75를 넘어 line이 완성됨
 				//완성된 라인 출력
 				cout << setw(2) << lineCount << "| " << line << endl;
-
 				//라인 초기화
 				line.clear();
 				line.resize(0);
-
 				//Count 변수 조정
 				lineCount += 1;
 				byteCount = 0;
-
 				//새로운 line에 현재 word추가
 				line += *itr;
 				line += ' ';
@@ -72,25 +68,19 @@ void Console::printConsole(string consoleMessage) {
 		next_cursor++;
 	}
 	next_cursor--;
-	//20라인이 초과되지 않는 상태에서 마지막 라인은 75byte가 되지 못하면 출력되지 않는다. 이를 보정
-	if (byteCount != 75 && itr == newLines.end()) {
-		cout << setw(2) << (lineCount == 0 ? 1 : lineCount) << "| " << line << endl;
+	//20라인이 초과되지 않는 상태에서 마지막 라인은 벡터의 끝에 도달하면 출력되지 못한다. 이를 보정한다.
+	if (lineCount <= 20 && itr == newLines.end()) {
+		cout << setw(2) << lineCount << "| " << line << endl;
 	}
 
 	/* 텍스트 출력 완료 */
 
 	printConsole_line();
-
 	cout << "n:다음페이지, p:이전페이지, i:삽입, d:삭제, c:변경, s:찾기, t:저장후종료" << endl;
-
 	printConsole_line();
-
 	cout << consoleMessage << endl; //매개변수로 전달받은 콘솔 메시지를 출력
-
 	printConsole_line();
-
 	cout << "입력 : " << endl;
-
 	printConsole_line();
 
 	//명령어 입력을 위해 커서의 위치를 '입력: ' 다음으로 조정
@@ -164,6 +154,7 @@ string Console::nextInput() {
 			break;
 		default:
 			//checkError에서 허용되지 않는 명령어를 체크하므로 다시 체크할 필요 없다.
+			return string("");
 			break;
 		}
 	}
@@ -332,7 +323,8 @@ void Console::checkNumOfParameterAndSplitInput(string& anInput, vector<string>& 
 
 	//","의 개수가 명령어 별로 정해진 수만큼 존재하는지 확인한다.
 	if (numOfComma < numOfSplit) {
-		throw string("명령어가 올바르지 않습니다. - ") + anInputSplit[0] + string(" 명령어의 인자 개수는 ") + to_string(numOfSplit + 1) + string("개여야 합니다!");
+		throw string("명령어가 올바르지 않습니다. - ") + anInputSplit[0] 
+			+ string(" 명령어의 인자 개수는 ") + to_string(numOfSplit + 1) + string("개여야 합니다!");
 	}
 	//최소 (numOfSplit+1)개의 인자가 있는 것으로 확인되었다.
 	//인자들을 벡터로 분리한다.

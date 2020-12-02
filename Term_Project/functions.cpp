@@ -1,6 +1,5 @@
 #include "newLines.h"
 
-
 /*
  * givenIterator() - 벡터에서 입력한 line, word를 찾고 해당 반복자를 리턴한다.
  */
@@ -45,12 +44,12 @@ vector<string>::iterator Console::givenIterator(int line, int word) {
 	//만약 word를 찾다가 byteCount가 75를 초과하면 다음 라인으로 넘어간 것으로 간주하고 에러를 출력해야 한다.
 	//이를 위해 byteCount 변수를 먼저 초기화 해준다.
 	byteCount = 0;
-
 	for (; givenWord > 0; givenWord--) {
 		itr++;
 		byteCount += itr->length() + 1;
 		if (byteCount > 75) {
-			throw string("명령어가 올바르지 않습니다. - ") + to_string(line) + string("라인에는 ") + to_string(word) + string("번째 단어가 존재하지 않습니다!");
+			throw string("명령어가 올바르지 않습니다. - ") + to_string(line) + string("라인에는 ")
+				+ to_string(word) + string("번째 단어가 존재하지 않습니다!");
 		}
 	}
 
@@ -75,7 +74,8 @@ string Console::i_insertWord(vector<string> inputSplit) {
 	//givenIterator() 함수에서 포인터 에러로 인해 처리가 불가하므로 if문을 통해 직접 처리해준다.
 	if ((line == 1 && word == 0) && current_cursor == 0) {
 		newLines.emplace(newLines.begin(), inputSplit[3]);
-		return inputSplit[1] + string("번째 라인의 ") + inputSplit[2] + string("번째 단어 뒤에 단어 \"") + inputSplit[3] + string("\"을 삽입했습니다");
+		return inputSplit[1] + string("번째 라인의 ") + inputSplit[2]
+			+ string("번째 단어 뒤에 단어 \"") + inputSplit[3] + string("\"을 삽입했습니다");
 	}
 	//나머지 경우에는 inputSplit을 통해 주어진 명령어의 인자를 line, word로 갖는 반복자를 얻는다.
 	else {
@@ -83,7 +83,8 @@ string Console::i_insertWord(vector<string> inputSplit) {
 		//해당 반복자 뒤에 단어를 삽입해야 하므로 itr에 1을 더해준다.
 		itr += 1;
 		newLines.emplace(itr, inputSplit[3]);
-		return inputSplit[1] + string("번째 라인의 ") + inputSplit[2] + string("번째 단어 뒤에 단어 \"") + inputSplit[3] + string("\"을 삽입했습니다");
+		return inputSplit[1] + string("번째 라인의 ") + inputSplit[2]
+			+ string("번째 단어 뒤에 단어 \"") + inputSplit[3] + string("\"을 삽입했습니다");
 	}
 
 }
@@ -101,14 +102,15 @@ string Console::d_deleteWord(vector<string> inputSplit) {
 	//해당 반복자가 가리키는 단어를 삭제한다.
 	newLines.erase(itr);
 
-	return inputSplit[1] + string("번째 라인의 ") + inputSplit[2] + string("번째 단어를 삭제했습니다.");
+	return inputSplit[1] + string("번째 라인의 ") 
+		+ inputSplit[2] + string("번째 단어를 삭제했습니다.");
 }
 /*
 * s_realign() - 입력한 문자열을 전체 파일에서 찾아 콘솔의 맨 앞으로 위치시킨다.
 */
 string Console::s_realign(vector<string> inputSplit) {
+	
 	int newCursor = -1;
-
 	for (vector<string>::iterator itr = newLines.begin(); itr != newLines.end(); itr++) {
 		newCursor++;
 		if (*itr == inputSplit[1]) {
@@ -118,7 +120,6 @@ string Console::s_realign(vector<string> inputSplit) {
 			return string("주어진 단어 \"") + inputSplit[1] + string("\"을 찾았습니다. 콘솔의 첫 라인에 출력합니다.");
 		}
 	}
-
 	throw string("주어진 단어 \"") + inputSplit[1] + string("\"은 파일에 존재하지 않습니다!");
 }
 /*
@@ -132,7 +133,8 @@ string Console::c_changeWord(vector<string> inputSplit) {
 		}
 	}
 
-	return string("전체 텍스트에서 모든 ") + inputSplit[1] + string("을 찾아 ") + inputSplit[2] + string("로 변경했습니다.");
+	return string("전체 텍스트에서 모든 ")
+		+ inputSplit[1] + string("을 찾아 ") + inputSplit[2] + string("로 변경했습니다.");
 }
 /*
 * t_saveAndExit() - 지금까지 작업한 내용을 txt 파일에 저장하고 콘솔을 종료한다.
@@ -167,7 +169,7 @@ string Console::n_nextPage() {
 
 	//print_console이 문자열의 마지막 까지 출력을 마치면 next_consor이 벡터의 size를 벗어나게 된다.
 	//따라서 이때는 바로 p_previousPage()함수를 실행해준다.
-	if (next_cursor > newLines.size()) {
+	if (next_cursor > (signed int) newLines.size()) {
 		return p_previousPage(true);
 	}
 
@@ -178,7 +180,6 @@ string Console::n_nextPage() {
 
 	//현 시점의 itr로 부터 20 라인이 존재하는지 계산한다.
 	//20 라인이 itr 이후에 존재하지 않으면 마지막 단어로 부터 20 라인을 출력하도록 cursor를 조정한다.
-
 	int byteCount = 0, lineCount = 1;
 
 	for (; itr != newLines.end(); itr++) {
@@ -208,17 +209,12 @@ string Console::n_nextPage() {
 		current_cursor = next_cursor; //현재 커서를 다음 커서로 정상적으로 변경한다.
 		return string("다음 페이지를 출력합니다.");
 	}
-
-
 }
 /*
 * p_previousPage() - 이전 페이지를 출력한다.
 * 현재 출력 중인 1라인의 첫 단어의 이전 단어를 새로운 출력의 마지막 단어로 출력하도록 cursor를 조정한다.
 */
 string Console::p_previousPage(bool usedByNextPageFunc) {
-	//현재 cursor는 1라인의 첫 단어를 가리킨다.
-	//따라서 cursor의 위치를 반복자에게 참조시키고 반복자-1부터 20라인을 역으로 계산해서
-	//1라인에 다시 오게 되는 반복자를 구하고 이를 다시 cursor화 시킨다.
 
 	if (current_cursor == 0) {
 		throw string("이전 페이지가 없습니다 - 첫 페이지 입니다!");
@@ -226,7 +222,8 @@ string Console::p_previousPage(bool usedByNextPageFunc) {
 
 	vector<string>::iterator itr = newLines.begin();
 
-	//이전페이지를 출력하기 위해 이 함수를 사용하면 cursor와 itr을 조정해 현재 cursor의 전 단어까지 출력하게 되고
+	//이전페이지를 출력하기 위해 이 함수를 사용하면 
+	//cursor와 itr을 조정해 현재 cursor의 전 단어까지 출력하게 되고
 	if (usedByNextPageFunc == false) {
 		for (int c = current_cursor; c > 0; c--) {
 			itr++;
@@ -235,7 +232,8 @@ string Console::p_previousPage(bool usedByNextPageFunc) {
 		itr--;
 		current_cursor--; //현 시점에서 itr와 cursor는 새로운 콘솔 출력의 가장 마지막 단어를 가리킨다.
 	}
-	//nextPage()에서 마지막 20 라인을 출력하기 이 함수를 사용하면 current_cursor가 벡터의 마지막 단어를 가리키게 된다.
+	//nextPage()에서 마지막 20 라인을 출력하기 이 함수를 사용하면
+	//current_cursor가 벡터의 마지막 단어를 가리키게 된다.
 	else {
 		itr = newLines.end() - 1;
 		current_cursor = newLines.size();
@@ -271,10 +269,11 @@ string Console::p_previousPage(bool usedByNextPageFunc) {
 	}
 
 	else {
-		if (itr == newLines.begin()) {
-			current_cursor--;
-		}
-		current_cursor++;
+		//커서는 의도보다 한 단어 전을 가리킨다.
+		//따라서 현재 itr이 가리키는 위치가 벡터의 첫 단어가 아닐 경우 커서 위치 조정
+		if(itr != newLines.begin()) current_cursor++;
+
+		//메시지 출력 관련 코드
 		if (usedByNextPageFunc == false) { //previousPage()함수에서의 기본 리턴 값
 			return string("이전 페이지를 출력합니다.");
 		}
